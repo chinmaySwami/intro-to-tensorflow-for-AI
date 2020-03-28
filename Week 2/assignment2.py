@@ -1,5 +1,7 @@
 import tensorflow as tf
 import numpy as np
+from keras.wrappers.scikit_learn import KerasClassifier
+from sklearn.model_selection import GridSearchCV
 
 
 # Creating a function that would create and return a model
@@ -12,7 +14,7 @@ def create_model():
     ])
 
     # Compiling the model arch
-    model.compile(optimizer='adam', loss='sparse_categorical_crossentropy')
+    model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
     return model
 
@@ -20,19 +22,24 @@ def create_model():
 mnist = tf.keras.datasets.mnist
 
 # Splitting the dataset into train and test
-(training_images, training_labels) ,  (test_images, test_labels) = mnist.load_data()
+(training_images, training_labels),  (test_images, test_labels) = mnist.load_data()
 
 # Normalizing the dataset
 training_images = training_images/2
 test_images = test_images/2
 
-model = create_model()
+# Creating a model
+model = KerasClassifier(build_fn=create_model, verbose=0)
 
-# Training the model
-model.fit(training_images, training_labels, epochs=5, verbose=2)
+# Creating parameter dictionary for hypertuning
+params = {'epochs': [5, 6, 8, 10]}
+
+# Creating grid search object
+grid = GridSearchCV(estimator=model, param_grid=params, cv=5)
+grid_result = grid.fit(training_images, training_labels)
 
 # Testing the model
-model.evaluate(test_images, test_labels)
+grid_result.evaluate(test_images, test_labels)
 
 classifications = model.predict(test_images)
 
