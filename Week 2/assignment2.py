@@ -14,7 +14,7 @@ def create_model():
     ])
 
     # Compiling the model arch
-    model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['acc'])
 
     return model
 
@@ -39,7 +39,7 @@ grid = GridSearchCV(estimator=model, param_grid=params, cv=5)
 grid_result = grid.fit(training_images, training_labels)
 
 # Testing the model
-grid_result.evaluate(test_images, test_labels)
+grid_result.predict(test_images)
 
 classifications = model.predict(test_images)
 
