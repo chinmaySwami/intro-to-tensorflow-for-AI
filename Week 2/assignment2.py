@@ -29,7 +29,7 @@ training_images = training_images/2
 test_images = test_images/2
 
 # Creating a model
-model = KerasClassifier(build_fn=create_model, verbose=0)
+model = KerasClassifier(build_fn=create_model, verbose=1)
 
 # Creating parameter dictionary for hypertuning
 params = {'epochs': [5, 6, 8, 10]}
@@ -39,8 +39,6 @@ grid = GridSearchCV(estimator=model, param_grid=params, cv=5)
 grid_result = grid.fit(training_images, training_labels)
 
 # Testing the model
-grid_result.predict(test_images)
+classifications = grid_result.predict(test_images)
 
-classifications = model.predict(test_images)
-
-print(classifications[0], test_labels[0])
+print(accuracy_score(test_labels, classifications))
