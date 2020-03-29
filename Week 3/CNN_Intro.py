@@ -1,7 +1,4 @@
 import tensorflow as tf
-import numpy as np
-from keras.wrappers.scikit_learn import KerasClassifier
-from sklearn.model_selection import GridSearchCV
 from visualizing_cnn_layers import visualize_layer_results
 
 
@@ -34,6 +31,7 @@ model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=
 model.summary()  # prints the layer details of NN
 model.fit(training_images, training_labels, epochs=5)
 
+# Using models for predictions on test set
 loss= model.evaluate(test_images, test_labels)
 
 visualize_layer_results(model, test_images)
