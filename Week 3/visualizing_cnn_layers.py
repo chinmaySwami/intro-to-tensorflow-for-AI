@@ -20,3 +20,5 @@ def visualize_layer_results(model, test_images):
         f3 = activation_model.predict(test_images[THIRD_IMAGE].reshape(1, 28, 28, 1))[x]
         axarr[2, x].imshow(f3[0, :, :, CONVOLUTION_NUMBER], cmap='inferno')
         axarr[2, x].grid(False)
+
+    plt.show()
