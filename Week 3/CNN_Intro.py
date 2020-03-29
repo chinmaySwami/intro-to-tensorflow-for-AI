@@ -2,6 +2,8 @@ import tensorflow as tf
 import numpy as np
 from keras.wrappers.scikit_learn import KerasClassifier
 from sklearn.model_selection import GridSearchCV
+from visualizing_cnn_layers import visualize_layer_results
+
 
 # Download the MNIST dataset
 mnist = tf.keras.datasets.mnist
