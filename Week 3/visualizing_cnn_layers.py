@@ -1,9 +1,9 @@
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import tensorflow as tf
 
 
 def visualize_layer_results(model, test_images):
-    f, axarr = plt.subplot(3, 4)
+    f, axarr = plt.subplots(3, 4)
     FIRST_IMAGE = 0,
     SECOND_IMAGE = 7
     THIRD_IMAGE = 26

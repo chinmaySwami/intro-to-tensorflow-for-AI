@@ -35,3 +35,5 @@ model.summary()  # prints the layer details of NN
 model.fit(training_images, training_labels, epochs=5)
 
 loss= model.evaluate(test_images, test_labels)
+
+visualize_layer_results(model, test_images)
